@@ -1,0 +1,19 @@
+glue_client = boto3.client('glue')
+
+response = glue_client.create_job(
+    Name='BankingDataETLJob',
+    Role='AWSGlueServiceRole',  # Ensure the role has necessary permissions
+    Command={
+        'Name': 'glueetl',
+        'ScriptLocation': 's3://your-script-location/glue_script.py',
+        'PythonVersion': '3'
+    },
+    DefaultArguments={
+        '--job-language': 'python',
+        '--TempDir': 's3://your-temp-dir/temp',
+        '--enable-continuous-cloudwatch-log': 'true'
+    },
+    MaxRetries=1
+)
+
+print(f"Glue Job Created: {response['Name']}")
