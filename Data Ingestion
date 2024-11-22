@@ -1,0 +1,10 @@
+import boto3
+
+kinesis_client = boto3.client('kinesis')
+
+response = kinesis_client.create_stream(
+    StreamName='BankingTransactionStream',
+    ShardCount=1  # Adjust based on expected data volume
+)
+
+print(f"Stream Status: {response}")
