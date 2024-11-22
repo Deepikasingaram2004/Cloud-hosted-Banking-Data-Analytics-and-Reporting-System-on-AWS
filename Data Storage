@@ -1,0 +1,12 @@
+s3_client = boto3.client('s3')
+
+bucket_name = 'banking-data-lake'
+
+response = s3_client.create_bucket(
+    Bucket=bucket_name,
+    CreateBucketConfiguration={
+        'LocationConstraint': 'us-west-2'  # Adjust region as needed
+    }
+)
+
+print(f"Bucket created: {response['Location']}")
