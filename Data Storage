@@ -10,3 +10,10 @@ response = s3_client.create_bucket(
 )
 
 print(f"Bucket created: {response['Location']}")
+s3_client.put_bucket_versioning(
+    Bucket=bucket_name,
+    VersioningConfiguration={
+        'Status': 'Enabled'
+    }
+)
+
