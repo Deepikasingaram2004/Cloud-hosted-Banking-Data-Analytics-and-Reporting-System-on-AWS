@@ -1,0 +1,12 @@
+redshift_client = boto3.client('redshift')
+
+response = redshift_client.create_cluster(
+    ClusterIdentifier='banking-analytics-cluster',
+    NodeType='dc2.large',
+    MasterUsername='admin',
+    MasterUserPassword='YourSecurePassword',
+    DBName='bankingdb',
+    ClusterType='single-node',
+)
+
+print(f"Redshift Cluster Created: {response['ClusterIdentifier']}")
