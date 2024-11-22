@@ -1,0 +1,26 @@
+import boto3
+
+quicksight_client = boto3.client('quicksight')
+
+response = quicksight_client.create_data_source(
+    AwsAccountId='YourAWSAccountID',
+    DataSourceId='BankingDataSource',
+    Name='BankingDataSource',
+    Type='REDSHIFT',
+    DataSourceParameters={
+        'RedshiftParameters': {
+            'ClusterId': 'banking-analytics-cluster',
+            'Database': 'bankingdb',
+            'Host': 'your-cluster-endpoint',
+            'Port': 5439
+        }
+    },
+    Credentials={
+        'CredentialPair': {
+            'Username': 'admin',
+            'Password': 'YourSecurePassword'
+        }
+    }
+)
+
+print(f"QuickSight Data Source Created: {response['Arn']}")
